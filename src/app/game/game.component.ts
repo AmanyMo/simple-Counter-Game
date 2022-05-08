@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
-  oddNumber: number = 0;
-  evenNumber: number = 0;
+  // oddNumber: number = 0;
+  // evenNumber: number = 0;
+  oddNumbers: number[] = [];
+  evenNumbers: number[] = [];
+
   counter = 0;
   interval!: any;
 
@@ -22,18 +25,26 @@ export class GameComponent implements OnInit {
     this.interval = setInterval(() => {
       this.counter++;
       if (this.counter % 2 === 0) {
-        this.evenNumber = this.counter;
+        // this.evenNumber = this.counter;
+        this.evenNumbers.push(this.counter);
       } else {
-        this.oddNumber = this.counter;
+        // this.oddNumber = this.counter;
+        this.oddNumbers.push(this.counter);
       }
     }, 1000);
   }
 
+  pauseCounter() {
+    console.log('paused');
+    clearInterval(this.interval);
+  }
   endCounter() {
     console.log('ended');
-    this.oddNumber=0;
-  this.evenNumber = 0;
-  this.counter=0
+    //   this.oddNumber=0;
+    // this.evenNumber = 0;
+    this.counter = 0;
     clearInterval(this.interval);
+    this.oddNumbers = [];
+    this.evenNumbers = [];
   }
 }
